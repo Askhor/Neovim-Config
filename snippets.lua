@@ -26,6 +26,8 @@ local function copy(args)
 end
 
 ls.add_snippets("tex", {
+	s("\\subset", t("⊂")),
+	s("\\superset", t("⊃")),
 	s(
 		"env",
 		fmt(
@@ -41,10 +43,10 @@ ls.add_snippets("tex", {
 		)
 	),
 	s(
-		"basic setup",
+		"\\documentclass{article}",
 		fmt(
 			[[
-\documentclass{{article}}
+\documentclass{{{article}}}
 
 \usepackage[utf8]{{inputenc}}
 \usepackage{{unicode-helper}}
@@ -72,9 +74,10 @@ ls.add_snippets("tex", {
 }}
 \setlength{{\parindent}}{{0pt}}]],
 			{
-				title = i(1, "Title"),
-				author = i(2, "Author"),
-				date = i(3, "Date"),
+				article = i(1, "article"),
+				title = i(2, "Title"),
+				author = i(3, "Author"),
+				date = i(4, "Date"),
 			}
 		)
 	),
