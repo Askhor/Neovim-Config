@@ -82,3 +82,23 @@ ls.add_snippets("tex", {
 		)
 	),
 })
+
+ls.add_snippets("cpp", {
+	s(
+		"new header",
+		fmt(
+			[[
+			#ifndef {}_HPP
+			#define {}_HPP
+
+			{}
+
+			#endif]],
+			{
+				i(1, "FILE_NAME"),
+				f(copy, 1),
+				i(2, "// code"),
+			}
+		)
+	),
+})
