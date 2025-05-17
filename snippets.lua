@@ -101,4 +101,6 @@ ls.add_snippets("cpp", {
 			}
 		)
 	),
+	s('#"', fmt('#include "{}.hpp"', { i(1, "FILE_NAME") })),
+	s("#<", fmt("#include <{}>", { i(1, "FILE_NAME") })),
 })

@@ -2,6 +2,8 @@ Joni = {}
 Joni.c = {}
 Joni.latex = {}
 Joni.lua = {}
+Joni.js = {}
+Joni.python = {}
 --Joni.cpp = {}
 
 local luasnip = require("luasnip")
@@ -23,16 +25,28 @@ function Joni.open_file(file)
 	os.execute(string.format('open "%s" > /dev/null 2>&1', file))
 end
 
-function Joni.c.reformat_current()
+function Joni.standard_reformat(command)
 	local current_file = vim.fn.expand("%")
-	os.execute(string.format('clang-format -i "%s"', current_file))
+	os.execute(string.format(command, current_file))
 	vim.cmd("edit")
+	vim.cmd("mod")
+	vim.cmd("mod")
+end
+
+function Joni.c.reformat_current()
+	Joni.standard_reformat('clang-format -i "%s"')
 end
 
 function Joni.lua.reformat_current()
-	local current_file = vim.fn.expand("%")
-	os.execute(string.format('stylua "%s"', current_file))
-	vim.cmd("edit")
+	Joni.standard_reformat('stylua "%s"')
+end
+
+function Joni.js.reformat_current()
+	Joni.standard_reformat('js-beautify -r "%s"')
+end
+
+function Joni.python.reformat_current()
+	Joni.standard_reformat('black "%s"')
 end
 
 function Joni.latex.compile_latex()
@@ -65,6 +79,8 @@ Joni.autoreformat(Joni.c, "h")
 Joni.autoreformat(Joni.c, "cpp")
 Joni.autoreformat(Joni.c, "hpp")
 Joni.autoreformat(Joni.lua, "lua")
+Joni.autoreformat(Joni.js, "js")
+Joni.autoreformat(Joni.python, "py")
 
 vim.api.nvim_create_autocmd("BufWritePost", {
 	pattern = "*.tex",
@@ -95,6 +111,14 @@ vim.keymap.set(Joni.chars("vnix"), "vb", "<Esc>")
 vim.keymap.set(Joni.chars("vnix"), "<F5>", "<Esc>:!make<CR>")
 vim.keymap.set(Joni.chars("vnix"), "<F1>", function()
 	vim.diagnostic.open_float()
+end)
+vim.keymap.set(Joni.chars("vnix"), "<C-b>", function()
+	print("Decl")
+	vim.lsp.buf.declaration()
+end)
+vim.keymap.set(Joni.chars("vnix"), "<C-x>", function()
+	print("Def")
+	vim.lsp.buf.definition()
 end)
 vim.keymap.set(Joni.chars("n"), "<C-f>", "<Esc>:FzfLua grep<CR><CR>")
 vim.cmd("inoremap <C-Space> <C-x><C-o>")
