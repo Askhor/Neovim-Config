@@ -4,7 +4,6 @@ Joni.latex = {}
 Joni.lua = {}
 Joni.js = {}
 Joni.python = {}
---Joni.cpp = {}
 
 local luasnip = require("luasnip")
 
