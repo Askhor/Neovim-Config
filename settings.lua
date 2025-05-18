@@ -15,6 +15,7 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.number = true
 vim.cmd.colorscheme("habamax")
 vim.opt.scrolloff = 12
+
 use_tabs_on_file_type("cpp")
 use_tabs_on_file_type("js")
 vim.api.nvim_create_augroup("cpp_indent", { clear = true })
