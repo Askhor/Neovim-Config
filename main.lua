@@ -4,6 +4,7 @@ Joni.latex = {}
 Joni.lua = {}
 Joni.js = {}
 Joni.python = {}
+Joni.json = {}
 
 local luasnip = require("luasnip")
 
@@ -30,6 +31,10 @@ function Joni.standard_reformat(command)
 	vim.cmd("edit")
 	vim.cmd("mod")
 	vim.cmd("mod")
+end
+
+function Joni.json.reformat_current()
+	Joni.standard_reformat('pretty-json -i 4 "%s"')
 end
 
 function Joni.c.reformat_current()
@@ -80,6 +85,7 @@ Joni.autoreformat(Joni.c, "hpp")
 Joni.autoreformat(Joni.lua, "lua")
 Joni.autoreformat(Joni.js, "js")
 Joni.autoreformat(Joni.python, "py")
+Joni.autoreformat(Joni.json, "json")
 
 vim.api.nvim_create_autocmd("BufWritePost", {
 	pattern = "*.tex",
@@ -124,3 +130,4 @@ vim.cmd("inoremap <C-Space> <C-x><C-o>")
 
 require("snippets")
 require("treesitter_bert")
+require("treesitter_ash")
