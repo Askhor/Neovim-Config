@@ -103,4 +103,21 @@ ls.add_snippets("cpp", {
 	),
 	s('#"', fmt('#include "{}.hpp"', { i(1, "FILE_NAME") })),
 	s("#<", fmt("#include <{}>", { i(1, "FILE_NAME") })),
+	s(
+		"fori",
+		fmt(
+			[[
+			for (int {} = {}; {} < {}; {}++) {{
+				{}
+			}}]],
+			{
+				i(1, "i"),
+				i(2, "0"),
+				f(copy, 1),
+				i(3, "10"),
+				f(copy, 1),
+				i(4, "//code"),
+			}
+		)
+	),
 })
