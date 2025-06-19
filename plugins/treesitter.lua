@@ -29,6 +29,7 @@ return {
 				"bert",
 				"scheme",
 				"haskell",
+				"agda",
 				"query",
 			},
 			playground = {
